@@ -1,5 +1,5 @@
 #### Builder Stage ####
-FROM node:14.17.4-alpine3.14 AS builder
+FROM node:17-alpine AS builder
 
 WORKDIR /home/node/app
 ENV NODE_ENV development
