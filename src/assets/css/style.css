@@ -20458,7 +20458,7 @@ p.disc.banner-para {
 .service-one-inner::after {
   position: absolute;
   content: "";
-  height: 100%;
+  height: 75%;
   width: 1px;
   background: #0001;
   right: -15px;
@@ -29425,9 +29425,6 @@ p.disc {
   .rts-service-areah2-im-3 .image-area img.three {
     width: 85%;
   }
-}
-.rts-service-areah2-im-3.eight .title-area.service-h2.service::after {
-  content: "01";
 }
 
 .working-process-area2 {
