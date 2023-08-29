@@ -11,25 +11,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Build
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          target: builder
-          load: true
-          tags: ashudev-website:latest
-
-      - name: Import deps
-        run: |
-          docker run --rm -v $PWD:/home/node/app ashudev-website:latest npm i --quiet
-
-      - name: Build Sources
-        run: |
-          docker run --rm -v $PWD:/home/node/app ashudev-website:latest npm run build --quiet
-
       - name: Configure AWS credentials
         id: aws-configure
         uses: aws-actions/configure-aws-credentials@v1
