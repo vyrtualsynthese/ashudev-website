@@ -1,0 +1,285 @@
+// Our Working process Style hear
+
+.working-process-bg{
+    background-image: url(../images/working-step/bg-01.jpg);
+    max-width: 1680px;
+    margin:0 auto ; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+.rts-working-process-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .inner{
+        width: 192px;
+        height: 192px;
+        border: 2px dashed #0b4df52f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 33px;
+        transition: .3s;
+        position: relative;
+        &.two{
+            &::after{
+                content: '02';
+            }
+        }
+        &.three{
+            &::after{
+                content: '03';
+            }
+        }
+        &.four{
+            &::after{
+                content: '04';
+            }
+        }
+        &::after{
+            position: absolute;
+            right: 5px;
+            top: 7px;        
+            content: '01';
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--color-primary-2);
+            color: #fff;
+            transform: scale(0);
+            transition: .3s;
+
+        }
+        .icon{
+            height: 144px;
+            width: 144px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .content{
+        .title{
+            margin-bottom: 7px;
+        }
+    }
+    &.process-lg{
+        .inner{
+            width: 245px;
+            height: 245px;
+            &::after{
+                width: 60px;
+                height: 60px;
+    
+            }
+            .icon{
+                width: 193.03px;
+                height: 193.03px;
+            }
+        }
+    }
+    &:hover{
+        .inner{
+            border: 2px dashed var(--color-primary-2);
+            &::after{
+                transform: scale(1);
+            }
+        }
+    }
+}
+
+
+.rts-service-areah2-im-3{
+    .image-area{
+        position: relative;
+        margin-bottom: 120px;
+        margin-top: 30px;
+        @media #{$small-mobile} {
+            margin-bottom: 80px;
+        }
+        .ratio-area{
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            @media #{$small-mobile} {
+                top: 30px;
+                left: 30px;
+            }
+            .ratio{
+                color: #fff;
+                margin-bottom: 0px;
+                font-size: 40px;
+                font-weight: 700;
+            }
+            span{
+                font-size: 18px;
+                font-weight: 500;
+                color: #fff;
+                @media #{$small-mobile} {
+                    font-size: 16px;
+                }
+            }
+        }
+        img{
+            border-radius: 20px;
+        }
+        img{
+            &.two{
+                position: absolute;
+                z-index: 5;
+                top: -10%;
+                left: 40%;
+                animation: jump-1 5s linear infinite;
+            }
+        }
+        img{
+            &.three{
+                position: absolute;
+                left: 18%;
+                top: 38%;
+                @media #{$laptop-device} {
+                    width: 85%;
+                }
+            }
+        }
+    }
+    &.eight{
+        .title-area.service-h2.service::after{
+            content: '01';
+        }
+    }
+}
+.working-process-area2{
+    background: url("../images/working-step/bg-02.jpg");
+    max-width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .container{
+        .title-area{
+            span{
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 23px;
+            }
+            .title{
+                color: #fff;
+            }
+        }
+        .rts-working-process-1{
+            .inner{
+                border-color: #5264f330;
+                &::after{
+                    background: var(--color-primary-4);
+                }
+            }
+            &:hover{
+                .inner{
+                    border-color: var(--color-primary-4);
+                }
+            }
+            .content{
+                .title{
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+
+.working-process-area2{
+    &.home-6{
+        .rts-working-process-1{
+            .inner{
+                border-color: #fa360a25;
+            }
+        }
+    }
+}
+
+.index-seven .rts-title-area.gallery::after {
+    content: "Gallery";
+    left: 18%;
+    transform: translateX(-50%);
+    z-index: -1;
+    display: none;
+}
+
+.working-process-area2.home-6 .container .rts-working-process-1:hover .inner {
+    border-color: var(--color-primary-6);
+}
+.working-process-area2.home-6 .container .rts-working-process-1 .inner::after{
+    background: var(--color-primary-6);
+}
+.rts-working-process-section{
+    &.eight{
+        .title-area{
+            &::after{
+                content: '02';
+                left: 7%;
+                transform: translateX(-50%);
+                top: -70%;
+                height: 145px;
+            }
+        }
+        .rts-working-process-inner{
+            margin-top: 60px;
+            .wrapper{
+                text-align: center;
+                padding: 25px 40px 15px;
+                background-color: #fff;
+                border-style: solid;
+                border-width: 1px;
+                border-color: #e4e7ee;
+                border-radius: 20px;
+                box-shadow: 0px 12px 24px 0px rgb(18 22 34 / 7%);
+                transition: all .4s;
+                @media(max-width:1200px){
+                    margin-bottom: 15px;
+                }
+                &:hover{
+                    .icon{
+                        img{
+                            transform: scale(110%);
+                        }
+                    }
+                    .content{
+                        .title{
+                            color: var(--color-primary-2);
+                        }
+                    }
+                }
+                .icon{
+                    img{    
+                        width: 70px;
+                        transform: scale(100%);
+                        transition: all .4s;
+                    }
+                }
+                .content{
+                    margin-top: 25px;
+                    transition: all .4s;
+                    .title{
+                        margin-bottom: 12px;
+                        transition: all .4s;
+                    }
+                    .disc{
+                        margin-bottom: 25px;
+                        line-height: 1.8;
+                    }
+                }
+            }
+        }
+    }
+}
