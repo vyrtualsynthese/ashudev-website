@@ -1,104 +1,421 @@
 /*
- * Ashu Dev — small overrides on top of the FinBiz template stylesheet.
- * Kept apart from style.css so the template file stays untouched.
+ * ashudev.com — one page, no framework, no JavaScript.
+ * Layout is a single column of blocks on a 820px measure; the only
+ * multi-column parts are the service cards and the track-record rows.
  */
 
-.ashudev-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
+:root {
+    --brand: #2a3692;
+    --brand-dark: #1f2970;
+    --ink: #14181f;
+    --muted: #5b6473;
+    --line: #e4e7f0;
+    --surface: #f6f7fb;
+    --measure: 820px;
 }
 
-/* The template sets display:block on these anchors; keep the mark and the
-   wordmark on one line. */
-.header-main-one .thumbnail a.ashudev-brand,
-.footer-three-single-wized.left a.logo_footer.ashudev-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-.ashudev-brand img {
-    height: 40px;
-    width: auto;
+html {
+    -webkit-text-size-adjust: 100%;
 }
 
-.ashudev-brand span {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1c2539;
-    letter-spacing: 0.5px;
-    line-height: 1;
-    white-space: nowrap;
+body {
+    margin: 0;
+    background: #fff;
+    color: var(--ink);
+    font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
 }
 
-@media only screen and (max-width: 575px) {
-    .ashudev-brand img {
-        height: 32px;
-    }
-
-    .ashudev-brand span {
-        font-size: 18px;
-    }
+a {
+    color: var(--brand);
+    text-underline-offset: 2px;
 }
 
-/* The wordmark sits beside the mark; the template's rule pads the image only. */
-.footer-three-single-wized.left a.logo_footer.ashudev-brand img {
-    height: 48px;
+a:focus-visible {
+    outline: 3px solid rgba(42, 54, 146, 0.35);
+    outline-offset: 2px;
+    border-radius: 3px;
 }
 
-.rts-sidebar-menu-desktop .logo-1 img {
-    max-width: 52px;
-    height: auto;
+.wrap {
+    width: 100%;
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 24px;
 }
 
-.client-wrapper-one img {
-    max-height: 56px;
-    width: auto;
-    box-shadow: 0 10px 30px rgba(33, 5, 5, 0.05);
-    border-radius: 15px;
-}
-
-.footer-links {
-    list-style: none;
-    padding: 0;
+h1,
+h2,
+h3 {
+    font-family: "Red Hat Display", "DM Sans", sans-serif;
+    line-height: 1.2;
     margin: 0;
 }
 
-.footer-links li {
-    margin-bottom: 12px;
+p {
+    margin: 0;
 }
 
-.footer-links a,
-.footer-legal a {
-    color: #1c2539;
-    text-decoration: underline;
+/* Header */
+
+.top {
+    border-bottom: 1px solid var(--line);
+    background: #fff;
 }
 
-.footer-links a:hover,
-.footer-legal a:hover {
-    color: var(--color-primary);
+.top-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    min-height: 64px;
 }
 
-.footer-legal {
+.brand {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    color: var(--ink);
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.brand img {
+    display: block;
+    width: 32px;
+    height: 32px;
+}
+
+.top nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 22px;
+    font-size: 15px;
+}
+
+.top nav a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.top nav a:hover {
+    color: var(--brand);
+}
+
+/* Buttons */
+
+.btn {
+    display: inline-block;
+    flex: 0 0 auto;
+    padding: 12px 22px;
+    border: 1px solid var(--brand);
+    border-radius: 6px;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: var(--brand-dark);
+    border-color: var(--brand-dark);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--brand);
+}
+
+.btn-ghost:hover {
+    background: rgba(42, 54, 146, 0.07);
+    color: var(--brand-dark);
+}
+
+.btn-small {
+    padding: 9px 16px;
+    font-size: 15px;
+}
+
+/* Hero */
+
+.hero {
+    padding-top: 72px;
+    padding-bottom: 64px;
+}
+
+.eyebrow {
     font-size: 13px;
-    line-height: 1.8;
-    color: #5d666f;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 14px;
 }
 
-.contact-status {
-    margin-top: 15px;
+h1 {
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.role {
+    margin-top: 6px;
+    font-size: 21px;
+    color: var(--muted);
+}
+
+.lead {
+    margin-top: 22px;
+    max-width: 62ch;
+    font-size: 19px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.hint {
+    margin-top: 18px;
     font-size: 15px;
-    color: #1c2539;
+    color: var(--muted);
 }
 
-.contact-fallback {
-    margin-top: 20px;
+/* Sections */
+
+.section {
+    border-top: 1px solid var(--line);
+    padding: 56px 0;
+}
+
+h2 {
+    font-size: 27px;
+    font-weight: 700;
+    margin-bottom: 26px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px;
+}
+
+.card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 16px;
+    color: var(--muted);
+}
+
+/* Track record */
+
+.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline li {
+    display: flex;
+    gap: 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.timeline li:last-child {
+    border-bottom: 0;
+}
+
+.when {
+    flex: 0 0 150px;
+    font-size: 15px;
+    color: var(--muted);
+    padding-top: 2px;
+}
+
+.what {
+    font-size: 16px;
+}
+
+.clients {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+/* Contact */
+
+.contact {
+    background: var(--surface);
+}
+
+.contact .lead {
+    font-size: 18px;
+    max-width: 58ch;
+}
+
+.links {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 28px;
+    font-size: 16px;
+}
+
+.links li {
+    display: flex;
+    gap: 10px;
+}
+
+.links span {
+    flex: 0 0 86px;
+    color: var(--muted);
+    font-size: 15px;
+    padding-top: 2px;
+}
+
+/* Long-form page: the privacy policy */
+
+.doc {
+    padding-top: 56px;
+    padding-bottom: 72px;
+}
+
+.doc h1 {
+    font-size: 34px;
+}
+
+.doc .updated {
+    margin-top: 8px;
+    color: var(--muted);
     font-size: 15px;
 }
 
-.contact-fallback a {
-    color: #1c2539;
-    text-decoration: underline;
+.doc h2 {
+    font-size: 20px;
+    margin: 36px 0 10px;
+}
+
+.doc p {
+    margin-bottom: 12px;
+    max-width: 68ch;
+}
+
+/* Footer */
+
+.bottom {
+    border-top: 1px solid var(--line);
+    padding: 30px 0 40px;
+}
+
+.legal {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+.meta {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+@media (max-width: 720px) {
+    .top-inner {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+    }
+
+    .top nav {
+        display: none;
+    }
+
+    .hero {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    h1 {
+        font-size: 34px;
+    }
+
+    .role {
+        font-size: 18px;
+    }
+
+    .lead {
+        font-size: 17px;
+    }
+
+    .section {
+        padding: 42px 0;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    .cards,
+    .links {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline li {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .when {
+        flex: none;
+    }
+
+    .actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media print {
+    .top,
+    .actions,
+    .bottom {
+        display: none;
+    }
+
+    .contact,
+    .card {
+        background: #fff;
+        border-color: #ccc;
+    }
+
+    a {
+        color: var(--ink);
+    }
 }
