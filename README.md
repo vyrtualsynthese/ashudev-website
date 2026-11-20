@@ -14,8 +14,8 @@ and the files next to it are the site.
 
 ## Where the work is tracked
 
-The repository has a project on the Vikunja board at <https://vikunja.kub.local>
-(LAN only): `ashudev-website`, with one kanban view, `Board`, whose columns are
+The repository has a project on the operator's self-hosted Vikunja board:
+`ashudev-website`, with one kanban view, `Board`, whose columns are
 `Idea`, `Shaping`, `Backlog`, `Doing`, `Validation` and `Done`.
 
 Pending work is a card there, and nowhere else: no `TODO.MD`, no checklist in
@@ -81,15 +81,27 @@ Publishing the current `src/` over it:
 
 ```bash
 git fetch origin
+python3 tools/pdf-actions.py src/assets/cv/*.pdf   # both print "0 marker(s)"; stop otherwise
 git switch gh-pages
 git rm -rq --ignore-unmatch .          # empty the published tree
 git checkout origin/develop -- src     # take the site from the branch you published
 mv src/* . && rmdir src
 printf 'ashudev.com\n' > CNAME
 touch .nojekyll
-git add -A && git commit -m "🌐 site: publish"
+git add -A -- index.html confidentialite.html favicon.ico assets CNAME .nojekyll
+git commit -m "🌐 site: publish"
 git push origin gh-pages
 ```
+
+The `git add` lists the published paths instead of `-A`: the emptied tree still holds
+whatever sat untracked in the operator's working copy, and `-A` would commit and
+serve it. A new top-level file on the site therefore needs adding to that list.
+
+`tools/pdf-actions.py` decompresses every stream in both CV files and looks for an
+action that fires when a reader opens the PDF (`/OpenAction`, `/JavaScript`,
+`/Launch`, `/SubmitForm`). Both files print `0 marker(s)`, which is the expected
+result; anything else stops the publish. It runs from the `develop` checkout,
+before the switch, because `tools/` is not part of the published tree.
 
 `CNAME` and `.nojekyll` date from when Pages served the domain. The cluster
 ignores both — it clones the branch and nginx serves it — so they are kept only
