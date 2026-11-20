@@ -12,6 +12,33 @@ The site served at `https://ashudev.com`.
 There is no bundler, no `package.json`, and nothing to compile: `src/index.html`
 and the files next to it are the site.
 
+## Where the styles live
+
+| File | What it holds |
+|---|---|
+| `src/assets/css/style.css` | The template's stylesheet, used as delivered except for the font import |
+| `src/assets/css/fonts.css` | Red Hat Display and DM Sans, self-hosted: the page requests no third party |
+| `src/assets/css/ashudev.css` | Overrides for this site: wordmark, client logos, footer, contact form |
+
+Fonts are SIL Open Font License 1.1; the licence texts sit next to the `.woff2`
+files in `src/assets/fonts/`.
+
+## Local preview
+
+```bash
+python3 -m http.server -d src 8000
+```
+
+Then open `http://127.0.0.1:8000/`. Serving the directory matters: opening the
+file directly breaks the relative asset paths.
+
+## The contact form
+
+The site is static and has no form backend. The form composes an e-mail in the
+visitor's own mail client and sends nothing to a server, which is what the
+privacy page states. Sending it directly (Formspree, Web3Forms, an API of your
+own) means changing the form's `action` and the privacy page with it.
+
 ## How it is published
 
 GitHub Pages serves the **`gh-pages`** branch with a legacy branch build and the

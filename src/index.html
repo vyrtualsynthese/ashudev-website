@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashu Dev Consultant IT</title>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.png">
+    <title>Ashu Dev — Conseil IT, DevOps et cloud pour PME</title>
+    <meta name="description" content="Conseil IT, DevOps et cloud pour les PME, micro-entreprises et e-commerces : consultation d'expertise, audit et aide au recrutement. Basé à Paris.">
+    <link rel="canonical" href="https://ashudev.com/">
+    <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
     <link rel="stylesheet" href="assets/css/plugins/fontawesome-5.css">
     <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/unicons.css">
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/ashudev.css">
 </head>
 
 <body class="home-violet onepage">
@@ -24,36 +27,29 @@
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-6">
                         <div class="thumbnail">
-                            <a href="index.html">
-                                <img src="assets/images/logo/logo-5.svg" alt="finbiz-logo">
+                            <a href="index.html" class="ashudev-brand">
+                                <img src="assets/images/logo/ashudev-mark.png" alt="" width="40" height="40">
+                                <span>Ashu Dev</span>
                             </a>
                         </div>
                     </div>
                     <div class=" col-xl-9 col-lg-8 col-md-8 col-sm-8 col-6">
                         <div class="main-header main-header-four">
-                            <nav class="nav-main mainmenu-nav d-none d-xl-block">
+                            <nav class="nav-main mainmenu-nav d-none d-xl-block" aria-label="Navigation principale">
                                 <ul class="mainmenu">
-                                    <li><a href="#banner">Home</a></li>
+                                    <li><a href="#banner">Accueil</a></li>
                                     <li><a href="#services">Services</a></li>
-                                    <li><a href="#about-us">About Us</a></li>
-                                    <li><a href="#team">Team</a></li>
+                                    <li><a href="#about">À propos</a></li>
+                                    <li><a href="#profil">Profil</a></li>
                                     <li><a href="#contact">Contact</a></li>
-                                    <li><a href="#blog">Blog</a></li>
                                 </ul>
                             </nav>
                             <div class="button-area">
-                                <div class="search-input-area">
-                                    <div class="container">
-                                        <div class="search-input-inner">
-                                            <div class="input-div">
-                                                <input id="searchInput1" class="search-input" type="text" placeholder="Search by keyword or #">
-                                                <button><i class="far fa-search"></i></button>
-                                            </div>
-                                            <div id="close" class="search-close-icon"><i class="far fa-times"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="#" class="rts-btn btn-primary btn-primary-4 ml--20 ml_sm--5 header-one-btn quote-btn">Prenez Rendez-vous</a>
+                                <a href="#contact" class="rts-btn btn-primary btn-primary-4 ml--20 ml_sm--5 header-one-btn quote-btn">Prendre rendez-vous</a>
+                                <button id="menu-btn" class="menu rts-btn btn-primary-alta ml--20" aria-label="Ouvrir le menu">
+                                    <img class="menu-dark" src="assets/images/icon/menu.png" alt="">
+                                    <img class="menu-light" src="assets/images/icon/menu-light.png" alt="">
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -65,10 +61,50 @@
 
     <div id="anywhere-home"></div>
 
+    <!-- start mobile menu -->
+    <div id="side-bar" class="side-bar">
+        <button class="close-icon-menu" aria-label="Fermer le menu"><i class="far fa-times"></i></button>
+        <div class="rts-sidebar-menu-desktop">
+            <a class="logo-1" href="index.html">
+                <img class="logo" src="assets/images/logo/ashudev-mark.png" alt="Ashu Dev">
+            </a>
+            <div class="body-mobile d-block d-xl-none">
+                <nav class="nav-main mainmenu-nav" aria-label="Navigation mobile">
+                    <ul class="mainmenu">
+                        <li><a href="#banner">Accueil</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">À propos</a></li>
+                        <li><a href="#profil">Profil</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="get-in-touch">
+                    <div class="h6 title">Contact</div>
+                    <div class="wrapper">
+                        <div class="single">
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="tel:+33788877344">07 88 87 73 44</a>
+                        </div>
+                        <div class="single">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:valentin.ronteix@ashudev.com">valentin.ronteix@ashudev.com</a>
+                        </div>
+                        <div class="single">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="https://maps.google.com/?q=14+rue+Bausset+75015+Paris">14 rue Bausset, 75015 Paris</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#contact" class="rts-btn btn-primary ml--20 ml_sm--5 header-one-btn quote-btnmenu">Prendre rendez-vous</a>
+            </div>
+        </div>
+    </div>
+    <!-- end mobile menu -->
+
     <!-- banner area start three -->
     <div class="rts-banner-area banner-three banner-four">
         <div class="shape">
-            <img src="assets/images/banner/shape/rectangle.png" alt="">
+            <img src="assets/images/banner/shape/Rectangle.png" alt="">
         </div>
         <div class="shape1">
             <img src="assets/images/banner/shape/05.png" alt="">
@@ -87,12 +123,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="banner-three-inner banner-four-inner">
-                            <!-- type headline start-->
-                            <h1 class="title cd-headline clip is-full-width">
-                                L'expertise IT <br> pour vos PME, <br> Micro entreprises <br> et ecomerces.
+                            <h1 class="title">
+                                L'expertise IT <br> pour vos PME, <br> micro-entreprises <br> et e-commerces.
                             </h1>
                             <div class="button-group">
-                                <a href="price-plan.html" class="rts-btn btn-primary-3 btn-primary-4">Prenez rendez-vous</a>
+                                <a href="#contact" class="rts-btn btn-primary-3 btn-primary-4">Prendre rendez-vous</a>
                             </div>
                         </div>
                     </div>
@@ -103,32 +138,28 @@
     <!-- banner area end three -->
 
     <!-- start Presentation area -->
-    <div class="rts-service-areah2-im-3 eight rts-section-gap">
+    <div class="rts-service-areah2-im-3 eight rts-section-gap" id="about">
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
                     <div class="image-area">
-                        <img src="assets/images/service/h2/03.jpg" alt="Service_Image">
-                        <img class="two" src="assets/images/service/h2/02.jpg" alt="Service_Image">
-                        <img class="three" src="assets/images/service/h2/01.jpg" alt="Service_Image">
-                        <div class="ratio-area">
-                            <h3 class="ratio">85%</h3>
-                            <span>Croissance</span>
-                        </div>
+                        <img src="assets/images/service/h2/03.jpg" alt="">
+                        <img class="two" src="assets/images/service/h2/02.jpg" alt="">
+                        <img class="three" src="assets/images/service/h2/01.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="service-h2-content pl--30">
                         <div class="title-area  service-h2 service">
                             <span>Pourquoi nous choisir</span>
-                            <h2 class="title">Faites grandir votre entreprise avec Ashudev. </h2>
+                            <h2 class="title">Faites grandir votre entreprise avec Ashu Dev.</h2>
                         </div>
                         <div class="content-wrapper">
                             <p class="disc">
-                                En tant qu'<b>expert</b> spécialisé en <b>DevOps</b> et <b>Infrastructure Cloud</b>, notre solide expertise, forgée au sein de <b>grands groupes</b> ainsi que de <b>jeunes startups</b>, se met au service des <b>petites et jeunes entreprises</b>. <br><br>
-                                Nous démocratisons l'accès à des solutions qui traditionnellement étaient réservées aux <b>grands acteurs du marché</b>.<br><br>
-                                <b>Accelerez</b> le developpement de votre entreprise, <b>optimisez</b> les performances de votre site web, tout en <b>réalisant des économies</b> avisées grâce à nos solutions sur mesure.<br><br>
-                                Avec Ashu Dev, votre entreprise aura tout d'une grande.<br><br>
+                                En tant qu'<b>expert</b> spécialisé en <b>DevOps</b> et <b>infrastructure cloud</b>, notre solide expérience, forgée au sein de <b>grands groupes</b> comme de <b>jeunes startups</b>, se met au service des <b>petites et jeunes entreprises</b>.<br><br>
+                                Nous rendons accessibles des solutions qui étaient traditionnellement réservées aux <b>grands acteurs du marché</b>.<br><br>
+                                <b>Accélérez</b> le développement de votre entreprise, <b>optimisez</b> les performances de votre site web et <b>réalisez des économies</b> grâce à des solutions sur mesure.<br><br>
+                                Avec Ashu Dev, votre entreprise a tout d'une grande.
                             </p>
                         </div>
                     </div>
@@ -140,11 +171,11 @@
 
 
     <!-- rts service post area  Start-->
-    <div class="rts-service-areah2-im-3 eight rts-section-gap">
+    <div class="rts-service-areah2-im-3 eight rts-section-gap" id="services">
         <div class="container">
             <div class="row">
                 <div class="title-area text-center business-case">
-                    <h2 class="title">Nos Services</h2>
+                    <h2 class="title">Nos services</h2>
                 </div>
             </div>
         </div>
@@ -154,12 +185,13 @@
                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="service-one-inner">
                         <div class="thumbnail">
-                            <img src="assets/images/service/icon/01.svg" alt="finbiz_service">
+                            <img src="assets/images/service/icon/01.svg" alt="">
                         </div>
                         <div class="service-details">
-                                <h5 class="title">Consultation d'expertises en IT</h5>
+                            <h5 class="title">Consultation d'expertise IT</h5>
                             <p class="disc">
-                                Nos consultations d'expertise sont une seance d'échange <b>d'une heure</b> pendant laquelle vous pouvez poser toutes vos questions.<br><br> Si une heure est trop limité pour répondre a toutes vos demandes, nous convenons d'un forfais et des étapes nécessaires pour vous apporter des réponses plus concretes et détaillées.
+                                Une séance d'échange <b>d'une heure</b>, au téléphone ou en visio, pendant laquelle vous posez toutes vos questions.<br><br>
+                                Si une heure ne suffit pas, nous convenons d'un forfait et des étapes nécessaires pour vous apporter des réponses concrètes et détaillées.
                             </p>
                         </div>
                     </div>
@@ -169,12 +201,13 @@
                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="service-one-inner">
                         <div class="thumbnail">
-                            <img src="assets/images/service/icon/02.svg" alt="finbiz_service">
+                            <img src="assets/images/service/icon/02.svg" alt="">
                         </div>
                         <div class="service-details">
-                                <h5 class="title">Audit</h5>
+                            <h5 class="title">Audit</h5>
                             <p class="disc">
-                                Nos audits vous aident à cibler les chantiers les plus pertinants pour des resultats rapides et impactants.<br><br> Nous vous aidons a definir vos objectifs et vous donnons la marche à suivre pour les atteindre.
+                                Nos audits ciblent les chantiers les plus pertinents pour des résultats rapides et mesurables.<br><br>
+                                Nous définissons vos objectifs avec vous et vous donnons la marche à suivre pour les atteindre.
                             </p>
                         </div>
                     </div>
@@ -184,12 +217,12 @@
                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="service-one-inner">
                         <div class="thumbnail">
-                            <img src="assets/images/service/icon/03.svg" alt="finbiz_service">
+                            <img src="assets/images/service/icon/03.svg" alt="">
                         </div>
                         <div class="service-details">
-                                <h5 class="title">Aide au recrutement</h5>
+                            <h5 class="title">Aide au recrutement</h5>
                             <p class="disc">
-                                Nous definissons ensembles le besoin et le profile adapté pour votre projet.<br><br> Nous rédigeons des fiches de poste précises, diffuser la recherche aupres de notre reseau de recruteurs, puis menons la sélection des CV et les entretiens techniques.
+                                Nous définissons ensemble le besoin et le profil adapté à votre projet : rédaction de la fiche de poste, diffusion auprès de notre réseau, sélection des CV et entretiens techniques.
                             </p>
                         </div>
                     </div>
@@ -202,52 +235,47 @@
     <!-- rts service post area ENd -->
 
     <!-- rts-team details area Start-->
-    <div class="rts-team-details rts-section-gap">
+    <div class="rts-team-details rts-section-gap" id="profil">
         <div class="container">
             <div class="row">
                 <div class="title-area text-center business-case">
-                    <h2 class="title">Mon Profile</h2>
+                    <h2 class="title">Mon profil</h2>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="row g-5">
-                <div class="col-xl-6 col-lg-12 col-md-12">
-                    <div class="details-thumb">
-                        <img src="assets/images/team/tm/team-lg.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-12 col-md-12 pl--35 pl_sm--15">
+                <div class="col-xl-10 offset-xl-1 col-lg-12 col-md-12">
                     <div class="details-right-inner">
                         <div class="title-area">
                             <span class="pre-title">
-                                Expert Devops, Cloud Engineer, Formateur
+                                DevOps, cloud engineer, formateur
                             </span>
                             <h3 class="title">Valentin Ronteix</h3>
                         </div>
                         <p class="disc">
-                            7 ans d'expertise pour de nombreux clients grands comptes, je suis polyvalent. En plus de mes competences techniques en Development, Devops, Cloud, je suis aussi competent en gestion de projet, gestion des equipes, recrutement. Mon secret, toujours rester curieux et a l'écoute.
+                            Une expérience forgée auprès de grands comptes comme de jeunes startups, en développement, DevOps et cloud. J'y ajoute la gestion de projet, l'encadrement d'équipes et le recrutement. La recette : rester curieux et rester à l'écoute.
                         </p>
                         <div class="team-details-support-wrapper">
-                            <i class="fab fa-linkedin"></i>
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
                             <div class="support-innner">
-                                <span>Linkedin</span>
-                                <a href="https://www.linkedin.com/in/vyrtualsynthese/">
+                                <span>LinkedIn</span>
+                                <a href="https://www.linkedin.com/in/vyrtualsynthese/" rel="me noopener" target="_blank">
                                     <h5 class="title">/in/vyrtualsynthese</h5>
                                 </a>
                             </div>
                         </div>
                         <div class="team-details-support-wrapper">
-                            <i class="fab fa-github"></i>
+                            <i class="fab fa-github" aria-hidden="true"></i>
                             <div class="support-innner">
-                                <span>Github</span>
-                                <a href="https://github.com/vyrtualsynthese">
+                                <span>GitHub</span>
+                                <a href="https://github.com/vyrtualsynthese" rel="me noopener" target="_blank">
                                     <h5 class="title">vyrtualsynthese</h5>
                                 </a>
                             </div>
                         </div>
                         <div class="team-details-support-wrapper">
-                            <i class="far fa-map-marker-alt"></i>
+                            <i class="far fa-map-marker-alt" aria-hidden="true"></i>
                             <div class="support-innner">
                                 <span>Localisation</span>
                                 <h5 class="title">Paris</h5>
@@ -272,18 +300,17 @@
             </div>
             <div class="row">
                 <div class="client-wrapper-one">
-                    <a href="#"><img src="assets/images/client/01.png" alt="business_finbiz"></a>
-                    <a href="#"><img src="assets/images/client/02.png" alt="business_finbiz"></a>
-                    <a href="#"><img src="assets/images/client/03.png" alt="business_finbiz"></a>
-                    <a href="#"><img src="assets/images/client/04.png" alt="business_finbiz"></a>
+                    <img src="assets/images/client/01.png" alt="Ferrari">
+                    <img src="assets/images/client/03.png" alt="Adeo">
+                    <img src="assets/images/client/04.png" alt="Google Cloud">
+                    <img src="assets/images/client/05.png" alt="Kering">
                 </div>
             </div>
             <div class="row">
                 <div class="client-wrapper-one">
-                    <a href="#"><img src="assets/images/client/05.png" alt="business_finbiz"></a>
-                    <a href="#"><img src="assets/images/client/06.png" alt="business_finbiz"></a>
-                    <a href="#"><img src="assets/images/client/07.png" alt="business_finbiz"></a>
-                    <a href="#"><img src="assets/images/client/09.png" alt="business_finbiz"></a>
+                    <img src="assets/images/client/06.png" alt="La Poste Mobile">
+                    <img src="assets/images/client/07.png" alt="République française">
+                    <img src="assets/images/client/09.png" alt="EDF">
                 </div>
             </div>
         </div>
@@ -295,78 +322,70 @@
         <div class="container">
             <div class="row mt--40">
                 <div class="title-area text-center working-process">
-                    <span>Working Steps</span>
-                    <h2 class="title">Working Process Style One</h2>
+                    <span>Déroulement</span>
+                    <h2 class="title">Comment ça se passe</h2>
                 </div>
             </div>
             <div class="row g-5 mt--20 align-items-center">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                    <!-- single wirking process -->
                     <div class="rts-working-process-1 text-center">
                         <div class="inner">
                             <div class="icon">
-                                <img src="assets/images/working-step/icon/01.svg" alt="Working_process">
+                                <img src="assets/images/working-step/icon/01.svg" alt="">
                             </div>
                         </div>
                         <div class="content">
-                            <h6 class="title">Make a Plan</h6>
+                            <h6 class="title">On se parle</h6>
                             <p class="disc">
-                                Nostra proin fusce hendrerit <br> viverra nisl torquent.
+                                Un échange d'une heure pour comprendre votre contexte, vos objectifs et vos contraintes.
                             </p>
                         </div>
                     </div>
-                    <!-- single wirking process End -->
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                    <!-- single wirking process -->
                     <div class="rts-working-process-1 process-lg text-center">
                         <div class="inner two">
                             <div class="icon">
-                                <img src="assets/images/working-step/icon/02.svg" alt="Working_process">
+                                <img src="assets/images/working-step/icon/02.svg" alt="">
                             </div>
                         </div>
                         <div class="content">
-                            <h6 class="title">Cost Calculating</h6>
+                            <h6 class="title">Un devis clair</h6>
                             <p class="disc">
-                                Nostra proin fusce hendrerit <br> viverra nisl torquent.
+                                Périmètre, livrables, prix et calendrier, écrits noir sur blanc avant de commencer.
                             </p>
                         </div>
                     </div>
-                    <!-- single wirking process End -->
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                    <!-- single wirking process -->
                     <div class="rts-working-process-1 text-center">
                         <div class="inner three">
                             <div class="icon">
-                                <img src="assets/images/working-step/icon/03.svg" alt="Working_process">
+                                <img src="assets/images/working-step/icon/03.svg" alt="">
                             </div>
                         </div>
                         <div class="content">
-                            <h6 class="title">Business Growth</h6>
+                            <h6 class="title">L'intervention</h6>
                             <p class="disc">
-                                Nostra proin fusce hendrerit <br> viverra nisl torquent.
+                                Consultation, audit ou recrutement, mené avec vous et à votre rythme.
                             </p>
                         </div>
                     </div>
-                    <!-- single wirking process End -->
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-                    <!-- single wirking process -->
                     <div class="rts-working-process-1 process-lg text-center">
                         <div class="inner four">
                             <div class="icon">
-                                <img src="assets/images/working-step/icon/04.svg" alt="Working_process">
+                                <img src="assets/images/working-step/icon/04.svg" alt="">
                             </div>
                         </div>
                         <div class="content">
-                            <h6 class="title">Success Mission</h6>
+                            <h6 class="title">Le suivi</h6>
                             <p class="disc">
-                                Nostra proin fusce hendrerit <br> viverra nisl torquent.
+                                Un rapport, des recommandations priorisées et un point dans les semaines qui suivent.
                             </p>
                         </div>
                     </div>
-                    <!-- single wirking process End -->
                 </div>
             </div>
         </div>
@@ -385,126 +404,93 @@
                 <div class="col-lg-7 col-md-12 col-sm-12 col-12">
                     <div class="contact-form-area-one">
                         <div class="rts-title-area contact text-start">
-                            <p class="pre-title">
-                                Make An Appointment
-                            </p>
-                            <h2 class="title">Request a free quote</h2>
+                            <p class="pre-title">Prendre rendez-vous</p>
+                            <h2 class="title">Parlons de votre projet</h2>
                         </div>
-                        <form action="#">
+                        <form id="contact-form" action="mailto:valentin.ronteix@ashudev.com" method="post" enctype="text/plain">
                             <div class="name-email">
-                                <input type="text" placeholder="Your Name" required>
-                                <input type="email" placeholder="Email Address" required>
+                                <input type="text" name="name" placeholder="Votre nom" aria-label="Votre nom" required>
+                                <input type="email" name="email" placeholder="Votre adresse e-mail" aria-label="Votre adresse e-mail" required>
                             </div>
-                            <input type="text" placeholder="Business Topic">
-                            <textarea placeholder="Type Your Message"></textarea>
-                            <button type="submit" class="rts-btn btn-primary">Submit Message</button>
+                            <input type="text" name="subject" placeholder="Sujet" aria-label="Sujet">
+                            <textarea name="message" placeholder="Votre message" aria-label="Votre message" required></textarea>
+                            <button type="submit" class="rts-btn btn-primary">Envoyer le message</button>
+                            <p id="form-status" role="status" class="contact-status"></p>
                         </form>
+                        <p class="contact-fallback">
+                            Ou écrivez-moi directement :
+                            <a href="mailto:valentin.ronteix@ashudev.com">valentin.ronteix@ashudev.com</a>
+                            — <a href="tel:+33788877344">07 88 87 73 44</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- contact area end -->
-    
+
     <!-- start footer area -->
-    <!-- rts footer three area start -->
     <div class="rts-footer-area footer-three footer-four rts-section-gapTop footer-bg-2">
         <div class="container pb--100 pb_sm--40">
             <div class="row g-5">
-                <div class="col-xl-3 col-lg-6">
+                <div class="col-xl-4 col-lg-6">
                     <div class="footer-three-single-wized left">
-                        <a href="index" class="logo_footer">
-                            <img src="assets/images/logo/logo-5.1.svg" alt="Logo-image">
+                        <a href="index.html" class="logo_footer ashudev-brand">
+                            <img src="assets/images/logo/ashudev-mark.png" alt="" width="56" height="56">
+                            <span>Ashu Dev</span>
                         </a>
-                        <p class="disc">Felis consquat magnis fames sagittis ultrices plasodales porttitor quisque
-                            ultrice tempor turpis.</p>
+                        <p class="disc">Conseil IT, DevOps et cloud pour les PME, micro-entreprises et e-commerces.</p>
                         <ul class="social-three-wrapper">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="#"><i class="fab fa-skype"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/vyrtualsynthese/" rel="me noopener" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href="https://github.com/vyrtualsynthese" rel="me noopener" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
                         </ul>
                     </div>
                 </div>
-                <!-- footer three mid area -->
-                <div class="col-xl-6 col-lg-6">
-                    <div class="row">
-                        <!-- footer mid area left -->
-                        <div class="col-lg-6">
-                            <div class="footer-three-single-wized mid-left">
-                                <h5 class="title">Office Information</h5>
-                                <div class="body">
-                                    <div class="info-wrapper">
-                                        <div class="single">
-                                            <ul class="icon">
-                                                <li><i class="fas fa-phone-alt"></i></li>
-                                            </ul>
-                                            <div class="info">
-                                                <span>Call Us 24/7</span>
-                                                <a href="#">(+256) 2145.2156</a>
-                                            </div>
-                                        </div>
-                                        <div class="single">
-                                            <ul class="icon">
-                                                <li><i class="far fa-envelope"></i></li>
-                                            </ul>
-                                            <div class="info">
-                                                <span>Work with us</span>
-                                                <a href="#">info@finbiz.com</a>
-                                            </div>
-                                        </div>
-                                        <div class="single">
-                                            <ul class="icon">
-                                                <li><i class="fas fa-map-marker-alt"></i></li>
-                                            </ul>
-                                            <div class="info">
-                                                <span>Our Location</span>
-                                                <a href="#">XYZ Hilton Street, 125 <br>
-                                                    Town United State</a>
-                                            </div>
-                                        </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="footer-three-single-wized mid-left">
+                        <h5 class="title">Contact</h5>
+                        <div class="body">
+                            <div class="info-wrapper">
+                                <div class="single">
+                                    <ul class="icon">
+                                        <li><i class="fas fa-phone-alt"></i></li>
+                                    </ul>
+                                    <div class="info">
+                                        <span>Téléphone</span>
+                                        <a href="tel:+33788877344">07 88 87 73 44</a>
+                                    </div>
+                                </div>
+                                <div class="single">
+                                    <ul class="icon">
+                                        <li><i class="far fa-envelope"></i></li>
+                                    </ul>
+                                    <div class="info">
+                                        <span>E-mail</span>
+                                        <a href="mailto:valentin.ronteix@ashudev.com">valentin.ronteix@ashudev.com</a>
+                                    </div>
+                                </div>
+                                <div class="single">
+                                    <ul class="icon">
+                                        <li><i class="fas fa-map-marker-alt"></i></li>
+                                    </ul>
+                                    <div class="info">
+                                        <span>Adresse</span>
+                                        <a href="https://maps.google.com/?q=14+rue+Bausset+75015+Paris">14 rue Bausset<br>75015 Paris</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- footer mid area left end -->
-
-                        <!-- footer mid area right -->
-                        <div class="col-lg-6">
-                            <div class="footer-three-single-wized mid-right">
-                                <h5 class="title">Get Updates</h5>
-                                <div class="body">
-                                    <div class="update-wrapper">
-                                        <p class="disc">Sign up for our latest news & articles. We won’t give you spam
-                                            mails.</p>
-                                        <form class="email-footer-area">
-                                            <input type="email" placeholder="Enter Email Address" required>
-                                            <button type="submit"><i class="fas fa-location-arrow"></i></button>
-                                        </form>
-                                        <div class="note-area">
-                                            <p><span>Note:</span> We do not publish your email</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- footer mid area right end -->
                     </div>
                 </div>
-                <!-- footer three mid area ENd -->
-                <div class="col-xl-3 col-lg-6">
-                    <div class="footer-three-single-wized right">
-                        <h5 class="title">Instagram Posts</h5>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="footer-three-single-wized mid-left">
+                        <h5 class="title">Informations</h5>
                         <div class="body">
-                            <div class="footer-gallery-inner">
-                                <a href="#"><img src="assets/images/footer/three-gallery/01.png" alt="Footer-gallery"></a>
-                                <a href="#"><img src="assets/images/footer/three-gallery/02.png" alt="Footer-gallery"></a>
-                                <a href="#"><img src="assets/images/footer/three-gallery/03.png" alt="Footer-gallery"></a>
-                                <a href="#"><img src="assets/images/footer/three-gallery/04.png" alt="Footer-gallery"></a>
-                                <a href="#"><img src="assets/images/footer/three-gallery/05.png" alt="Footer-gallery"></a>
-                                <a href="#"><img src="assets/images/footer/three-gallery/06.png" alt="Footer-gallery"></a>
-                            </div>
+                            <ul class="footer-links">
+                                <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+                                <li><a href="https://www.linkedin.com/in/vyrtualsynthese/" rel="me noopener" target="_blank">LinkedIn</a></li>
+                                <li><a href="https://github.com/vyrtualsynthese" rel="me noopener" target="_blank">GitHub</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -515,13 +501,13 @@
                 <div class="row">
                     <div class="col-12">
                         <p class="disc text-center ptb--25">
-                            FINBIZ - Copyright 2022. All rights reserved.
+                            © 2026 Ashu Dev
                         </p>
-                        <p class="disc text-center pb--25">
+                        <p class="disc text-center pb--25 footer-legal">
                             Ashu Dev, SASU au capital de 1000 € — 14 rue Bausset, 75015 Paris —
-                            RCS Paris B 898 442 538 — TVA FR72898442538 — SIRET 89844253800010<br />
+                            RCS Paris B 898 442 538 — TVA FR72898442538 — SIRET 89844253800010<br>
                             Directeur de la publication : Valentin Ronteix —
-                            <a href="mailto:valentin.ronteix@ashudev.com">valentin.ronteix@ashudev.com</a><br />
+                            <a href="mailto:valentin.ronteix@ashudev.com">valentin.ronteix@ashudev.com</a><br>
                             Hébergement : GitHub Pages (GitHub, Inc.), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA
                         </p>
                     </div>
@@ -559,10 +545,32 @@
     <script src="assets/js/plugins/counterup.js"></script>
     <script src="assets/js/plugins/sal.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/contact.form.js"></script>
     <!-- main Js -->
     <script src="assets/js/main.js"></script>
     <!-- scripts end form hear -->
+    <script>
+        // The site is static and has no form backend: the form composes an
+        // e-mail in the visitor's own mail client instead of posting nowhere.
+        (function () {
+            var form = document.getElementById('contact-form');
+            if (!form) return;
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                var data = new FormData(form);
+                var subject = (data.get('subject') || '').trim() || 'Demande depuis ashudev.com';
+                var body = 'Nom : ' + (data.get('name') || '') +
+                    '\nE-mail : ' + (data.get('email') || '') +
+                    '\n\n' + (data.get('message') || '');
+                window.location.href = 'mailto:valentin.ronteix@ashudev.com' +
+                    '?subject=' + encodeURIComponent(subject) +
+                    '&body=' + encodeURIComponent(body);
+                var status = document.getElementById('form-status');
+                if (status) {
+                    status.textContent = 'Votre logiciel de messagerie s\'ouvre avec le message pré-rempli.';
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html>
