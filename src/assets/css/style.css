@@ -45,8 +45,7 @@
 
 ----------------------------*/
 /* Default  */
-@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+/* Webfonts are self-hosted in assets/css/fonts.css; no Google Fonts import. */
 :root {
   --color-primary: #DF0A0A;
   --color-primary-2: #0B4DF5;
@@ -29550,8 +29549,9 @@ p.disc {
 
 .progress-wrap::after {
   position: absolute;
-  font-family: "unicons";
-  content: "\e84b";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  content: "\f062";
   text-align: center;
   line-height: 46px;
   font-size: 24px;
@@ -29573,14 +29573,15 @@ p.disc {
 
 .progress-wrap:hover::after {
   opacity: 1;
-  content: "\e84b";
+  content: "\f062";
   border: 2px solid var(--color-primary);
 }
 
 .progress-wrap::before {
   position: absolute;
-  font-family: "unicons";
-  content: "\e84b";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  content: "\f062";
   text-align: center;
   line-height: 46px;
   font-size: 24px;
@@ -30704,4 +30705,3 @@ p.disc {
 .footer-five .footer-one-single-wized .single-footer-post .post-right .red-more {
   color: var(--color-primary-2);
 }
-/*# sourceMappingURL=../maps/style.css.map */
