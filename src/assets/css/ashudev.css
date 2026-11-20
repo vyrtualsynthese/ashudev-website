@@ -1,0 +1,104 @@
+/*
+ * Ashu Dev — small overrides on top of the FinBiz template stylesheet.
+ * Kept apart from style.css so the template file stays untouched.
+ */
+
+.ashudev-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+/* The template sets display:block on these anchors; keep the mark and the
+   wordmark on one line. */
+.header-main-one .thumbnail a.ashudev-brand,
+.footer-three-single-wized.left a.logo_footer.ashudev-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ashudev-brand img {
+    height: 40px;
+    width: auto;
+}
+
+.ashudev-brand span {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1c2539;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 575px) {
+    .ashudev-brand img {
+        height: 32px;
+    }
+
+    .ashudev-brand span {
+        font-size: 18px;
+    }
+}
+
+/* The wordmark sits beside the mark; the template's rule pads the image only. */
+.footer-three-single-wized.left a.logo_footer.ashudev-brand img {
+    height: 48px;
+}
+
+.rts-sidebar-menu-desktop .logo-1 img {
+    max-width: 52px;
+    height: auto;
+}
+
+.client-wrapper-one img {
+    max-height: 56px;
+    width: auto;
+    box-shadow: 0 10px 30px rgba(33, 5, 5, 0.05);
+    border-radius: 15px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a,
+.footer-legal a {
+    color: #1c2539;
+    text-decoration: underline;
+}
+
+.footer-links a:hover,
+.footer-legal a:hover {
+    color: var(--color-primary);
+}
+
+.footer-legal {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #5d666f;
+}
+
+.contact-status {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #1c2539;
+}
+
+.contact-fallback {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.contact-fallback a {
+    color: #1c2539;
+    text-decoration: underline;
+}
