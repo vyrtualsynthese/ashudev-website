@@ -1,3 +1,9 @@
 .idea
 node_modules
 dist
+
+# Nothing secret belongs in a repository that publishes a branch.
+.env*
+*.pem
+*.key
+id_*
