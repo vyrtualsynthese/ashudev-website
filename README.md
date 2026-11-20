@@ -41,9 +41,12 @@ own) means changing the form's `action` and the privacy page with it.
 
 ## How it is published
 
-GitHub Pages serves the **`gh-pages`** branch with a legacy branch build and the
-custom domain `ashudev.com` (`CNAME` in that branch, HTTPS enforced). Nothing
-publishes automatically: the branch is written by hand.
+The **`gh-pages`** branch is the site's content. Since 2026-11-20 the homelab
+cluster serves `ashudev.com`: the `ashudev-website` chart in the `homelab`
+repository clones that branch into an nginx pod and re-fetches it every 60
+seconds. Nothing publishes automatically: the branch is written by hand.
+GitHub Pages still builds it, but the domain's DNS points at the cluster, so the
+build is no longer what a visitor receives.
 
 Publishing the current `src/` over it:
 
@@ -59,12 +62,12 @@ git add -A && git commit -m "🌐 site: publish"
 git push origin gh-pages
 ```
 
-Two details that break the site when they are missing: `CNAME` (without it Pages
-drops the custom domain, and the certificate with it) and `.nojekyll` (without
-it Pages runs Jekyll and hides every path that starts with an underscore).
+`CNAME` and `.nojekyll` date from when Pages served the domain. The cluster
+ignores both — it clones the branch and nginx serves it — so they are kept only
+to leave the branch a valid Pages source.
 
-After the push, `gh api repos/vyrtualsynthese/ashudev-website/pages/builds/latest`
-answers `"status":"built"`, and the page is live within a minute.
+After the push, the cluster's clone fetches the new commit on its next 60-second
+interval.
 
 ## What used to publish it
 
