@@ -7,18 +7,22 @@ The site served at `https://ashudev.com`.
 | Path | What it is |
 |---|---|
 | `src/` | The site as it is written: static HTML and its assets, no build step |
-| `finbiz-html/` | The purchased template's own files, kept as the reference for markup and styles |
+| `finbiz-html/` | The purchased template, no longer used by the site; kept as the reference it came from |
 
 There is no bundler, no `package.json`, and nothing to compile: `src/index.html`
 and the files next to it are the site.
 
-## Where the styles live
+## What the page is
+
+One page, written to bring in contracts: who you are, what you do, where you
+worked, how to reach you, and the CV. Nothing else, and no JavaScript.
 
 | File | What it holds |
 |---|---|
-| `src/assets/css/style.css` | The template's stylesheet, used as delivered except for the font import |
+| `src/index.html` | The page itself |
+| `src/confidentialite.html` | The privacy policy |
+| `src/assets/css/ashudev.css` | The whole stylesheet: typography, layout, mobile, print |
 | `src/assets/css/fonts.css` | Red Hat Display and DM Sans, self-hosted: the page requests no third party |
-| `src/assets/css/ashudev.css` | Overrides for this site: wordmark, client logos, footer, contact form |
 
 Fonts are SIL Open Font License 1.1; the licence texts sit next to the `.woff2`
 files in `src/assets/fonts/`.
@@ -32,12 +36,25 @@ python3 -m http.server -d src 8000
 Then open `http://127.0.0.1:8000/`. Serving the directory matters: opening the
 file directly breaks the relative asset paths.
 
-## The contact form
+## The CV
 
-The site is static and has no form backend. The form composes an e-mail in the
-visitor's own mail client and sends nothing to a server, which is what the
-privacy page states. Sending it directly (Formspree, Web3Forms, an API of your
-own) means changing the form's `action` and the privacy page with it.
+`src/assets/cv/valentin-ronteix-cv.pdf` (French) and `-cv-en.pdf` (English) are
+served as they are. They are built from the YAML in
+`scripts/cv/resume-generator`, which owns the content:
+
+```bash
+cd ../../scripts/cv/resume-generator
+python3 generate_pdf.py --lang fr,en --outdir output
+```
+
+Copy the two files into `src/assets/cv/` under these names. Nothing regenerates
+them at deploy time, so a CV edit has to be followed by that copy.
+
+## Contact
+
+There is no form and no backend. The buttons are `mailto:` and `tel:` links, so
+a visitor writes from their own mail client and the site stores nothing. The
+privacy page says so.
 
 ## How it is published
 
