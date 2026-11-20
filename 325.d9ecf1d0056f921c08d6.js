@@ -1,0 +1,1 @@
+(self.webpackChunkashudevwebsite=self.webpackChunkashudevwebsite||[]).push([[325],{325:(e,t,n)=>{"use strict";function u(){return r().then((function(e){document.querySelectorAll(".avatar > img").forEach((function(t){t.setAttribute("src",e.default)}))}))}n.r(t),n.d(t,{imgLazy:()=>u});var r=function(){return n.e(182).then(n.t.bind(n,182,17))}}}]);
