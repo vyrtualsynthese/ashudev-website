@@ -12,6 +12,18 @@ The site served at `https://ashudev.com`.
 There is no bundler, no `package.json`, and nothing to compile: `src/index.html`
 and the files next to it are the site.
 
+## Where the work is tracked
+
+The repository has a project on the Vikunja board at <https://vikunja.kub.local>
+(LAN only): `ashudev-website`, with one kanban view, `Board`, whose columns are
+`Idea`, `Shaping`, `Backlog`, `Doing`, `Validation` and `Done`.
+
+Pending work is a card there, and nowhere else: no `TODO.MD`, no checklist in
+this file. A ticked box says an agent ran out of steps; a card says whether the
+work was accepted. The process is `homelab/docs/agent-protocol.md` — in short,
+agents move tasks between `Doing` and `Validation`, and only the operator moves
+one to `Done`.
+
 ## What the page is
 
 One page, written to bring in contracts: who you are, what you do, where you
