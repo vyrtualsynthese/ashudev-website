@@ -1,0 +1,64 @@
+name: Publish the site
+
+# `gh-pages` is the site: the homelab cluster clones that branch and serves it,
+# re-fetching every 60 seconds. This workflow is the only writer of the branch.
+# It rebuilds it from `src/` on every push to `main`, so the push is the release
+# and nothing is copied by hand.
+
+on:
+  push:
+    branches: [main]
+  # Republish `main` as it stands, without an empty commit.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Two publishes must not race. A queued run republishes the newer `src/`
+# instead of failing against a branch that moved.
+concurrency:
+  group: publish-gh-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          # A manual run may be started from any branch; it publishes `main`.
+          ref: main
+
+      - name: Check the CV PDFs for automatic actions
+        # Zero markers is the expected answer; anything else stops the publish
+        # before the branch is touched.
+        run: python3 tools/pdf-actions.py src/assets/cv/*.pdf
+
+      - name: Rebuild gh-pages from src
+        env:
+          PAGES: ${{ runner.temp }}/gh-pages
+        run: |
+          set -euo pipefail
+          SOURCE_SHA="$(git rev-parse HEAD)"
+          git fetch --no-tags origin +refs/heads/gh-pages:refs/remotes/origin/gh-pages
+
+          # A throwaway worktree, not the checked-out one: the published tree is
+          # the site at the root, not the repository's layout.
+          git worktree add --detach "$PAGES" origin/gh-pages
+          cd "$PAGES"
+
+          # The branch holds nothing but the site, so the whole tree is replaced.
+          git rm -rq --ignore-unmatch -- .
+          cp -a "$GITHUB_WORKSPACE/src/." .
+
+          # Kept to leave the branch a valid GitHub Pages source. The cluster
+          # ignores both: it clones the branch and nginx serves the files.
+          printf 'ashudev.com\n' > CNAME
+          touch .nojekyll
+
+          git add -A
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              commit -q -m '🌐 site: publish' -m "Source: $SOURCE_SHA"
+          git push origin HEAD:gh-pages

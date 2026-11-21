@@ -79,35 +79,31 @@ privacy page says so.
 The **`gh-pages`** branch is the site's content. Since 2026-11-20 the homelab
 cluster serves `ashudev.com`: the `ashudev-website` chart in the `homelab`
 repository clones that branch into an nginx pod and re-fetches it every 60
-seconds. Nothing publishes automatically: the branch is written by hand.
-GitHub Pages still builds it, but the domain's DNS points at the cluster, so the
-build is no longer what a visitor receives.
+seconds. GitHub Pages still builds it, but the domain's DNS points at the
+cluster, so the build is no longer what a visitor receives.
 
-Publishing the current `src/` over it:
+`.github/workflows/publish.yml` owns that branch. It runs on every push to
+`main` and does four things:
 
-```bash
-git fetch origin
-python3 tools/pdf-actions.py src/assets/cv/*.pdf   # both print "0 marker(s)"; stop otherwise
-git switch gh-pages
-git rm -rq --ignore-unmatch .          # empty the published tree
-git checkout origin/develop -- src     # take the site from the branch you published
-mv src/* . && rmdir src
-printf 'ashudev.com\n' > CNAME
-touch .nojekyll
-git add -A -- index.html confidentialite.html favicon.ico assets CNAME .nojekyll
-git commit -m "🌐 site: publish"
-git push origin gh-pages
-```
+1. It runs `tools/pdf-actions.py` over both CV files. It decompresses every
+   stream in each PDF and looks for an action that fires when a reader opens
+   it (`/OpenAction`, `/JavaScript`, `/Launch`, `/SubmitForm`). Both files print
+   `0 marker(s)`, which is the expected answer; anything else stops the publish
+   before the branch is touched.
+2. It adds a throwaway worktree on `gh-pages` and empties it.
+3. It copies `src/` into the root of that worktree, then writes `CNAME`
+   (`ashudev.com`) and an empty `.nojekyll`.
+4. It commits as `🌐 site: publish`, with the source commit in the body, and
+   pushes.
 
-The `git add` lists the published paths instead of `-A`: the emptied tree still holds
-whatever sat untracked in the operator's working copy, and `-A` would commit and
-serve it. A new top-level file on the site therefore needs adding to that list.
+So the push to `main` is the release, and nothing is copied by hand. The branch
+is never edited directly. Starting the same workflow from the Actions tab
+republishes `main` as it stands, which is what to use when the cluster's clone
+needs a fresh commit without a source change.
 
-`tools/pdf-actions.py` decompresses every stream in both CV files and looks for an
-action that fires when a reader opens the PDF (`/OpenAction`, `/JavaScript`,
-`/Launch`, `/SubmitForm`). Both files print `0 marker(s)`, which is the expected
-result; anything else stops the publish. It runs from the `develop` checkout,
-before the switch, because `tools/` is not part of the published tree.
+The workflow copies `src/` rather than listing the published paths: its worktree
+is fresh, so it holds no untracked file to sweep in by accident, and a new
+top-level file on the site needs no change to the workflow.
 
 `CNAME` and `.nojekyll` date from when Pages served the domain. The cluster
 ignores both — it clones the branch and nginx serves it — so they are kept only
@@ -124,3 +120,7 @@ certificate were destroyed on 2026-11-20 with the move to GitHub Pages, and the
 `dist/` directory had stopped being produced when the site became static. The
 workflow was deleted rather than repaired: it deployed something that no longer
 existed, to a place that no longer existed.
+
+Between 2026-11-20 and 2026-11-21 the branch was written by hand from a recipe
+in this file. The workflow above replaced it: a hand copy is no longer part of
+the publish path, and `gh-pages` is not edited directly.
