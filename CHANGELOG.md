@@ -6,6 +6,17 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- `.github/workflows/publish.yml`: publishing is a push to `main`. The workflow
+  runs the CV scan as a gate, rebuilds `gh-pages` from `src/` in a throwaway
+  worktree, and keeps `CNAME` and `.nojekyll`.
+
+### Changed
+
+- The README no longer carries a publish recipe: the workflow owns `gh-pages`,
+  and the hand copy is out of the path.
+
 ## [1.0.0] - 2026-11-21
 
 The first tagged release: the site is one hand-written page and the CV it links.
