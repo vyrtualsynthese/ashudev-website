@@ -6,6 +6,8 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-21
+
 ### Added
 
 - `.github/workflows/publish.yml`: publishing is a push to `main`. The workflow
@@ -59,5 +61,6 @@ The first tagged release: the site is one hand-written page and the CV it links.
   its branch deleted. Its workflow ran `npm i` on the branch's own code and then
   read two AWS credentials on every `pull_request` event.
 
-[Unreleased]: https://github.com/vyrtualsynthese/ashudev-website/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/vyrtualsynthese/ashudev-website/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/vyrtualsynthese/ashudev-website/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/vyrtualsynthese/ashudev-website/releases/tag/v1.0.0
