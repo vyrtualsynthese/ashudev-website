@@ -2,15 +2,21 @@
 
 The site served at `https://ashudev.com`.
 
-## Two trees
+## One tree
+
+The site is a directory of static files and nothing else.
 
 | Path | What it is |
 |---|---|
 | `src/` | The site as it is written: static HTML and its assets, no build step |
-| `finbiz-html/` | The purchased template, no longer used by the site; kept as the reference it came from |
 
 There is no bundler, no `package.json`, and nothing to compile: `src/index.html`
 and the files next to it are the site.
+
+The purchased template this page was built from is not in the repository. It was
+`finbiz-html/`, 550 files with a `mailer.php` behind ten forms and a 239 KB
+jQuery UI bundle that nothing called; it was deleted on 2026-11-21 rather than
+kept as a reference nothing read.
 
 ## Where the work is tracked
 
