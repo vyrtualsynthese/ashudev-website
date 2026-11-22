@@ -21,6 +21,10 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - The workflow splits the gate and the publish into separate jobs, each with the
   permission it needs instead of one job holding a write token throughout.
   Pull request runs cancel their own previous run; publishes still queue.
+- The README's CV section gives a command that works: the generator is a
+  checkout beside this repository (`../scripts/cv/resume-generator`), not
+  `../../scripts/`, and its `generate_pdf.py` lives on `feat/cv-pdf` until that
+  branch merges.
 
 ### Fixed
 
