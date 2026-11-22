@@ -57,16 +57,25 @@ file directly breaks the relative asset paths.
 ## The CV
 
 `src/assets/cv/valentin-ronteix-cv.pdf` (French) and `-cv-en.pdf` (English) are
-served as they are. They are built from the YAML in
-`scripts/cv/resume-generator`, which owns the content:
+served as they are. They are built from the YAML in `../scripts/cv/resume-generator`,
+which owns the content. That generator is a separate checkout beside this one —
+`../scripts/cv/resume-generator` from this repository's root, which is the
+layout under `~/projets`, where `ashudev-website` sits next to `scripts`. It is
+not a directory inside this repository, so the command below starts at the root:
 
 ```bash
-cd ../../scripts/cv/resume-generator
+cd ../scripts/cv/resume-generator
 python3 generate_pdf.py --lang fr,en --outdir output
 ```
 
-Copy the two files into `src/assets/cv/` under these names. Nothing regenerates
-them at deploy time, so a CV edit has to be followed by that copy.
+`generate_pdf.py` is not on the generator's `main` yet: it exists on its
+`feat/cv-pdf` branch, so run `git switch feat/cv-pdf` there first. Until that
+branch merges, the command fails on `main` with "No such file".
+
+It writes `output/cv_valentin_ronteix_fr.pdf` and `output/cv_valentin_ronteix_en.pdf`.
+Copy them into `src/assets/cv/` as `valentin-ronteix-cv.pdf` and
+`valentin-ronteix-cv-en.pdf`. Nothing regenerates them at deploy time, so a CV
+edit has to be followed by that copy.
 
 ## Contact
 
@@ -82,19 +91,28 @@ repository clones that branch into an nginx pod and re-fetches it every 60
 seconds. GitHub Pages still builds it, but the domain's DNS points at the
 cluster, so the build is no longer what a visitor receives.
 
-`.github/workflows/publish.yml` owns that branch. It runs on every push to
-`main` and does four things:
+`.github/workflows/publish.yml` owns that branch. On every push to `main` it
+does three things:
 
-1. It runs `tools/pdf-actions.py` over both CV files. It decompresses every
-   stream in each PDF and looks for an action that fires when a reader opens
-   it (`/OpenAction`, `/JavaScript`, `/Launch`, `/SubmitForm`). Both files print
-   `0 marker(s)`, which is the expected answer; anything else stops the publish
-   before the branch is touched.
-2. It adds a throwaway worktree on `gh-pages` and empties it.
-3. It copies `src/` into the root of that worktree, then writes `CNAME`
+1. It adds a throwaway worktree on `gh-pages` and empties it.
+2. It copies `src/` into the root of that worktree, then writes `CNAME`
    (`ashudev.com`) and an empty `.nojekyll`.
-4. It commits as `🌐 site: publish`, with the source commit in the body, and
+3. It commits as `🌐 site: publish`, with the source commit in the body, and
    pushes.
+
+Before any of that, a first job runs `tools/pdf-actions.py` over both CV files.
+It runs on pull requests too, where it is the only job. It decompresses every
+stream in each PDF and looks for an action that fires when a reader opens it
+(`/OpenAction`, `/JavaScript`, `/Launch`, `/SubmitForm`). Both files print
+`0 marker(s)`, which is the expected answer; anything else fails the check, and
+on `main` it stops the publish before the branch is touched.
+
+A publish that fails on `main` opens an issue saying the site still serves the
+previous commit, with the run in it, and the next successful publish comments
+and closes it. Without that the failure would be a red run nobody looks at.
+Issues are switched off on this repository, so the alarm cannot open one yet:
+until that changes, a failed publish reports itself only as a failed run, and
+the alert job says so in the run's error annotation.
 
 So the push to `main` is the release, and nothing is copied by hand. The branch
 is never edited directly. Starting the same workflow from the Actions tab
