@@ -4,36 +4,68 @@ name: Publish the site
 # re-fetching every 60 seconds. This workflow is the only writer of the branch.
 # It rebuilds it from `src/` on every push to `main`, so the push is the release
 # and nothing is copied by hand.
+#
+# A pull request runs the CV gate and stops there: that check is what a review
+# waits for, and a pull request has no site to publish. The write tokens exist
+# only in the jobs that use them, and a failed publish on `main` opens an issue,
+# because otherwise the site keeps serving the previous commit in silence.
 
 on:
   push:
     branches: [main]
-  # Republish `main` as it stands, without an empty commit.
+  pull_request:
+  # Republish `main` as it stands, even when `src/` has not changed.
   workflow_dispatch:
 
+# The workflow's own token is read-only. A job that has to write asks for
+# exactly what it writes; nothing else in the workflow can reach the branch.
 permissions:
-  contents: write
+  contents: read
 
 # Two publishes must not race. A queued run republishes the newer `src/`
-# instead of failing against a branch that moved.
+# instead of failing against a branch that moved. A pull request check writes
+# nothing, so it cancels its own previous run rather than waiting in the queue.
 concurrency:
-  group: publish-gh-pages
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('gate-{0}', github.ref) || 'publish-gh-pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  publish:
+  gate:
+    name: CV gate
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out the repository
+        # Pinned to the v4.4.0 commit: a tag is a pointer someone else can move,
+        # and this tree is what a publish ends up serving.
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # A manual run publishes `main`, so it gates `main` rather than the
+          # branch the run was started from. Every other event gates its own ref.
+          ref: ${{ github.event_name == 'workflow_dispatch' && 'main' || '' }}
+
+      - name: Check the CV PDFs for automatic actions
+        # Zero markers is the expected answer. Anything else fails this check,
+        # and on `main` it stops the publish before the branch is touched.
+        run: python3 tools/pdf-actions.py src/assets/cv/*.pdf
+
+  publish:
+    name: Publish gh-pages
+    # A pull request stops at the gate: there is no site to publish yet.
+    if: github.event_name != 'pull_request'
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      # Closing the alarm issue after a good publish, below.
+      issues: write
     steps:
       - name: Check out main
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           # A manual run may be started from any branch; it publishes `main`.
           ref: main
-
-      - name: Check the CV PDFs for automatic actions
-        # Zero markers is the expected answer; anything else stops the publish
-        # before the branch is touched.
-        run: python3 tools/pdf-actions.py src/assets/cv/*.pdf
 
       - name: Rebuild gh-pages from src
         env:
@@ -58,7 +90,75 @@ jobs:
           touch .nojekyll
 
           git add -A
+          # A merge that changes nothing under `src/` still needs the commit: the
+          # cluster serves the branch tip, and a manual run exists precisely to
+          # give it a fresh one. Without `--allow-empty` the commit fails on an
+          # unchanged tree and the publish goes red for no reason.
           git -c user.name='github-actions[bot]' \
               -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
-              commit -q -m '🌐 site: publish' -m "Source: $SOURCE_SHA"
+              commit -q --allow-empty -m '🌐 site: publish' -m "Source: $SOURCE_SHA"
           git push origin HEAD:gh-pages
+
+      - name: Close the publish alarm
+        # The site is already published at this point, so nothing this step does
+        # may fail the job: a `gh` hiccup must not be reported as a failed
+        # publish. A leftover alarm is closed by the next successful run.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: 'Publish failed: the site still serves the previous commit'
+        run: |
+          set -euo pipefail
+          for NUMBER in $(gh issue list --repo "$GITHUB_REPOSITORY" --limit 100 \
+              --search 'is:open in:title "Publish failed"' --json number,title \
+              --jq ".[] | select(.title == env.TITLE) | .number"); do
+            gh issue comment "$NUMBER" --repo "$GITHUB_REPOSITORY" \
+              --body "Publish restored by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
+            gh issue close "$NUMBER" --repo "$GITHUB_REPOSITORY"
+          done
+
+  report:
+    name: Report the failed publish
+    # A failure on `main` leaves the site serving the previous commit until
+    # someone acts, and nothing else says so. A red pull request check is its
+    # own report, so it is not repeated here.
+    if: failure() && github.event_name != 'pull_request'
+    needs: [gate, publish]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Open or update the publish issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: 'Publish failed: the site still serves the previous commit'
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          BODY=$(cat <<EOF
+          A publish of \`main\` failed, so \`gh-pages\` was not touched and the
+          cluster keeps serving the previous commit.
+
+          - Run: $RUN
+          - Triggered by: $GITHUB_EVENT_NAME on $GITHUB_SHA (the run page names
+            the commit the job checked out; a manual run checks out \`main\`)
+
+          Fix the cause, then run the **Publish the site** workflow from the
+          Actions tab. It rebuilds \`gh-pages\` from \`main\`, and closes this
+          issue when it succeeds.
+          EOF
+          )
+          # A failed lookup must not lose the alarm: fall through and create.
+          NUMBER=$(gh issue list --repo "$GITHUB_REPOSITORY" --limit 100 \
+            --search 'is:open in:title "Publish failed"' --json number,title \
+            --jq ".[] | select(.title == env.TITLE) | .number" 2>/dev/null \
+            | sed -n '1p') || true
+          if [ -n "$NUMBER" ]; then
+            gh issue comment "$NUMBER" --repo "$GITHUB_REPOSITORY" --body "$BODY"
+          elif ! gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body "$BODY"; then
+            # This repository does not have Issues switched on, so the only
+            # signal left is this run. Say so where a reader of the run looks.
+            echo "::error::The publish of main failed and no issue could be opened: the repository has Issues disabled. Nothing else reports this — see $RUN"
+            exit 1
+          fi

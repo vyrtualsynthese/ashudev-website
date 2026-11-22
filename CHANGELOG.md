@@ -6,6 +6,33 @@ follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- The CV gate also runs on pull requests, as a check a review waits on. Before
+  this the gate only ran after the merge, so a pull request had no check at all
+  and a merge could publish a PDF nothing had scanned.
+- A publish that fails on `main` opens an issue with the run and the source
+  commit, because `gh-pages` is left untouched and the cluster keeps serving the
+  previous commit with nothing to say so. The next successful publish comments
+  and closes it.
+
+### Changed
+
+- The workflow splits the gate and the publish into separate jobs, each with the
+  permission it needs instead of one job holding a write token throughout.
+  Pull request runs cancel their own previous run; publishes still queue.
+
+### Fixed
+
+- A publish whose `src/` had not changed failed at the commit step, so a manual
+  republish — the one case dispatch exists for — could not create the commit
+  the cluster serves. The publish commit is now allowed to be empty.
+
+### Security
+
+- `publish.yml` pins `actions/checkout` to the v4.4.0 commit instead of the
+  mutable `v4` tag, and the workflow's default token is read-only.
+
 ## [1.1.0] - 2026-11-21
 
 ### Added
