@@ -10,11 +10,15 @@
     <link rel="canonical" href="https://ashudev.com/">
     <meta name="referrer" content="no-referrer">
     <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="preload" href="assets/fonts/red-hat-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/ashudev.css">
 </head>
 
 <body>
+
+    <a class="skip-link visually-hidden" href="#contenu">Aller au contenu</a>
 
     <header class="top">
         <div class="wrap top-inner">
@@ -22,17 +26,19 @@
                 <img src="assets/images/logo/ashudev-mark.png" alt="" width="32" height="32">
                 <span>Ashu Dev</span>
             </a>
-            <nav aria-label="Navigation principale">
-                <a href="#services">Services</a>
-                <a href="#parcours">Parcours</a>
-                <a href="#contact">Contact</a>
+            <nav aria-label="Sommaire de la page">
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#parcours">Parcours</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
             </nav>
             <a class="btn btn-small"
                 href="mailto:valentin.ronteix@ashudev.com?subject=Projet%20%E2%80%94%20ashudev.com">Écrire un e-mail</a>
         </div>
     </header>
 
-    <main>
+    <main id="contenu" tabindex="-1">
 
         <section class="wrap hero">
             <p class="eyebrow">Freelance · Paris et à distance</p>
@@ -48,7 +54,7 @@
                     href="mailto:valentin.ronteix@ashudev.com?subject=Projet%20%E2%80%94%20ashudev.com">Décrire mon projet</a>
                 <a class="btn btn-ghost" href="assets/cv/valentin-ronteix-cv.pdf" download>Télécharger le CV (PDF)</a>
             </p>
-            <p class="hint">Réponse sous 24 h · <a href="tel:+33788877344">07 88 87 73 44</a></p>
+            <p class="hint">Réponse sous 24 h · <a href="tel:+33788877344">07&nbsp;88&nbsp;87&nbsp;73&nbsp;44</a></p>
         </section>
 
         <section class="section" id="services">
@@ -132,7 +138,7 @@
                 <ul class="links">
                     <li><span>E-mail</span> <a
                             href="mailto:valentin.ronteix@ashudev.com">valentin.ronteix@ashudev.com</a></li>
-                    <li><span>Téléphone</span> <a href="tel:+33788877344">07 88 87 73 44</a></li>
+                    <li><span>Téléphone</span> <a href="tel:+33788877344">07&nbsp;88&nbsp;87&nbsp;73&nbsp;44</a></li>
                     <li><span>LinkedIn</span> <a href="https://www.linkedin.com/in/vyrtualsynthese/"
                             rel="me noopener" target="_blank">linkedin.com/in/vyrtualsynthese</a></li>
                     <li><span>GitHub</span> <a href="https://github.com/vyrtualsynthese" rel="me noopener"
