@@ -130,6 +130,22 @@ to leave the branch a valid Pages source.
 After the push, the cluster's clone fetches the new commit on its next 60-second
 interval.
 
+## Branches
+
+`main` publishes and `develop` integrates; every change reaches both through a
+pull request. The repository allows one merge method, rebase, so a release
+rewrites the release commits: `main` moves to new SHAs while `develop` keeps the
+old ones. `.github/workflows/realign-develop.yml` replays `develop` onto `main`
+after every push to `main`, which puts the two branches back on one line — a
+fast-forward when `develop` has nothing new, a rebase of its new commits when it
+has. Starting it from the Actions tab realigns a repository that drifted before
+the workflow existed. A rebase that cannot apply fails the run and leaves
+`develop` untouched, rather than half moved.
+
+Because the workflow rewrites `develop`, a local `develop` in the canonical
+checkout follows it with `git fetch && git reset --hard origin/develop` rather
+than `git pull`, which would add a merge commit back into the line.
+
 ## What used to publish it
 
 A workflow on every push to `main` synced a `dist/` directory to
