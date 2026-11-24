@@ -1,0 +1,66 @@
+name: Realign develop
+
+# The repository allows only rebase merges, so the `develop -> main` release
+# rewrites the release commits: `main` gets new SHAs while `develop` keeps the
+# old ones. Left alone, the next release pull request shows work that already
+# landed, and the two branches no longer share a base.
+#
+# `develop` refuses force pushes on purpose: a rewritten `develop` would detach
+# every open feature branch from its base. So this cannot rebase `develop`; it
+# merges `main` into it instead. The release commits arrive under their new
+# SHAs, the release pull request's diff goes back to the work that has not
+# landed, and the merge commit is flattened by the next release's rebase merge.
+
+on:
+  push:
+    branches: [main]
+  # Realign on demand, for a repository that drifted before this workflow existed.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One realign at a time: two runs racing would merge into the same branch, and a
+# queued run syncs the newer `develop` instead.
+concurrency:
+  group: realign-develop
+  cancel-in-progress: false
+
+jobs:
+  realign:
+    name: Merge main into develop
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Check out main with its full history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: main
+          # The merge needs the common ancestor; a shallow clone has none.
+          fetch-depth: 0
+
+      - name: Merge main into develop
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin +refs/heads/develop:refs/remotes/origin/develop
+
+          if git merge-base --is-ancestor origin/main origin/develop; then
+            echo "develop already contains main; nothing to realign."
+            exit 0
+          fi
+
+          git switch --create develop origin/develop
+          if ! git merge --no-ff --no-edit \
+              -m '🔀 merge: bring main into develop' origin/main; then
+            git merge --abort || true
+            echo "::error::main does not merge into develop cleanly; resolve it from the canonical checkout."
+            exit 1
+          fi
+
+          # A normal push, never a force: develop refuses those, and a rejected
+          # push fails this run instead of overwriting a commit that landed
+          # meanwhile.
+          git push origin develop
