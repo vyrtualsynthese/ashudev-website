@@ -135,16 +135,21 @@ interval.
 `main` publishes and `develop` integrates; every change reaches both through a
 pull request. The repository allows one merge method, rebase, so a release
 rewrites the release commits: `main` moves to new SHAs while `develop` keeps the
-old ones. `.github/workflows/realign-develop.yml` replays `develop` onto `main`
-after every push to `main`, which puts the two branches back on one line — a
-fast-forward when `develop` has nothing new, a rebase of its new commits when it
-has. Starting it from the Actions tab realigns a repository that drifted before
-the workflow existed. A rebase that cannot apply fails the run and leaves
-`develop` untouched, rather than half moved.
+old ones. Left alone, the next release pull request shows work that already
+landed, and the two branches no longer share a base.
 
-Because the workflow rewrites `develop`, a local `develop` in the canonical
-checkout follows it with `git fetch && git reset --hard origin/develop` rather
-than `git pull`, which would add a merge commit back into the line.
+`develop` refuses force pushes deliberately: a rewritten `develop` would detach
+every open feature branch from its base. So `.github/workflows/realign-develop.yml`
+merges `main` into `develop` after every push to `main`, as an ordinary commit
+the protection allows. The release commits arrive under their new SHAs, the
+release pull request's diff goes back to the work that has not landed, and the
+merge commit is flattened by the next release's rebase merge. Starting it from
+the Actions tab realigns a repository that drifted before the workflow existed.
+A merge that conflicts fails the run and leaves `develop` untouched, rather than
+half moved.
+
+A local `develop` in the canonical checkout follows the workflow with
+`git pull --ff-only`.
 
 ## What used to publish it
 
