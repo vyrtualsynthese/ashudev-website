@@ -1,0 +1,67 @@
+name: Realign develop
+
+# The repository allows only rebase merges, so the `develop -> main` release
+# rewrites the commits: `main` gets new SHAs while `develop` keeps the old ones,
+# and the next release pull request conflicts on work that is already merged.
+# This replays `develop` onto `main` after every push to `main`. When `develop`
+# already sits on `main` the rebase is a fast-forward and the step does nothing;
+# when it carries new work, that work is replayed on top of `main` instead of
+# being thrown away.
+#
+# Merging `main` into `develop` would not fix the forkpoint: the merge commit
+# would travel back in the next release. Rebasing keeps one line.
+
+on:
+  push:
+    branches: [main]
+  # Realign on demand, for a repository that drifted before this workflow existed.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One realign at a time: two runs racing on the same branch would fight over the
+# lease below, and a queued run replays the newer `develop` instead.
+concurrency:
+  group: realign-develop
+  cancel-in-progress: false
+
+jobs:
+  realign:
+    name: Replay develop onto main
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Check out main with its full history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: main
+          # A rebase needs the common ancestor; a shallow clone has none.
+          fetch-depth: 0
+
+      - name: Rebase develop onto main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin +refs/heads/develop:refs/remotes/origin/develop
+
+          if git merge-base --is-ancestor origin/develop origin/main; then
+            echo "develop is already contained in main; nothing to realign."
+            exit 0
+          fi
+
+          git switch --create develop origin/develop
+          # Commits whose patch is already in `main` become empty; dropping them
+          # is what makes `develop` land exactly on `main` when it carries no new
+          # work of its own.
+          if ! git rebase --empty=drop origin/main; then
+            git rebase --abort || true
+            echo "::error::develop does not rebase onto main cleanly; realign it from the canonical checkout."
+            exit 1
+          fi
+
+          # The lease pins the push to the develop this run fetched: a commit that
+          # lands meanwhile fails the run instead of being overwritten.
+          git push --force-with-lease=develop:"$(git rev-parse origin/develop)" origin develop
