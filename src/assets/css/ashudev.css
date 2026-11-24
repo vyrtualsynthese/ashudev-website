@@ -46,6 +46,10 @@ a:focus-visible {
     border-radius: 3px;
 }
 
+a:not(.btn):active {
+    color: var(--brand-dark);
+}
+
 /* Hides content visually but keeps it in the accessibility tree.
    :focus-within / :active opt elements out, so a skip link shows itself. */
 .visually-hidden:where(:not(:focus-within, :active)) {
@@ -154,6 +158,10 @@ p {
     color: var(--brand);
 }
 
+.top nav a:active {
+    color: var(--brand-dark);
+}
+
 /* Buttons */
 
 .btn {
@@ -175,6 +183,10 @@ p {
     border-color: var(--brand-dark);
 }
 
+.btn:active {
+    scale: 0.97;
+}
+
 .btn-ghost {
     background: transparent;
     color: var(--brand);
@@ -183,6 +195,16 @@ p {
 .btn-ghost:hover {
     background: color-mix(in srgb, var(--brand) 7%, transparent);
     color: var(--brand-dark);
+}
+
+.btn-ghost:active {
+    background: color-mix(in srgb, var(--brand) 14%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .btn {
+        transition: background-color 120ms ease-out, border-color 120ms ease-out, scale 120ms ease-out;
+    }
 }
 
 .btn-small {
